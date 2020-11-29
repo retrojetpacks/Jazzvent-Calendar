@@ -29,16 +29,8 @@ var scrs = ["https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/san-fransisco-7
 //Add css to reveal the underneath.
 
 
-function display_info(id)
-{
-    //get ID
-    //alert(id);
-    //Use ID to look up info from csv..?
-
-    //initiate dropdown box...
-}
-
-
+var date = new Date();
+var clickedDay;
 
 function setup_dateArray()
 {
@@ -64,13 +56,20 @@ function setup_dateArray()
 }
 
 
-function drawBoxes()
+function drawBoxes(json)
 {
+
   var dateArray = setup_dateArray();
     for (var i = 0; i < dateArray.length; i++) {
       var $box = $("<article></article>", {class: 'day', id: dateArray[i]});
-      var $content = $("<a />", {class: 'day-title', href: '#'}).text(dateArray[i]);
-      var $img = $("<img />", {class: "day-image", src: scrs[dateArray[i]-1]});
+      var $content = $("<a />", {class: 'day-title', id: dateArray[i], href: '#'}).text(dateArray[i]);
+
+      try {
+        var im = "/images-pre/" + json.musicians[dateArray[i]-1].photo
+        var $img = $("<img />", {class: "day-image", src: im});
+      } catch (e) {
+        var $img = $("<img />", {class: "day-image", src: scrs[dateArray[i]-1]});
+      }
 
       var R = (Math.random()+3)*40;
       var G = 0;
@@ -92,8 +91,21 @@ function drawSnow()
   }
 }
 
+function displayOverlay(entry)
+{
+  //alert(entry.musicians[0].artist);
+  var $overlay = $('<div id="overlay"> </div>');
+  $overlay.appendTo(document.body)
+}
+
+
 $(document).ready(function () {
-  drawBoxes();
+  //==== Load JSON data ====//
+  var obj = $.getJSON("jazzvent-database.json").done(function (data){
+  drawBoxes(data);
+  });
+
+  //==== draw snow effects ==//
   drawSnow();
 });
 
@@ -101,7 +113,42 @@ $(document).ready(function () {
 
 //$(".day-title").click(function(){ //direct binding
 $(document).on("click", ".day-title", function(){ //delegated binding, using on
-  $(this).toggleClass('faded');
+
+  if ($(this).hasClass('clicked'))
+  {
+    clickedDay = $(this)
+    $.getJSON("jazzvent-database.json").done(function (data){
+    //alert(JSON.stringify(data));
+    // alert($(this).attr("id"));
+    // if ($(this).attr("id") == "overlay")
+    // {
+    //   $("#overlay").remove();
+    // } else {
+    //   displayOverlay(data);
+    // }
+    displayOverlay(data);
+    });
+  }
+  else //Box not clicked
+  {
+    var day = $(this).attr("id");
+    if (date.getDate()-10 >= day) //for testing
+    {
+      $(this).toggleClass('faded');
+      if ($(this).hasClass('faded'))
+      {
+        $(this).toggleClass('clicked');
+      }
+    }
+  }
   //alert($(this).attr("class"));
-  display_info($(this).attr("id"));
+
+
+
+  event.preventDefault(); //stop scroll to top of page
 });
+
+$(document).on("click", "#overlay", function() {
+  $("#overlay").remove();
+  clickedDay.removeClass('clicked');
+})
