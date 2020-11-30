@@ -80,7 +80,7 @@ img {
 .clicked {}
 
 
-.clickMe {
+.day .clickMe {
   font-size: 1em;
   color: white;
   position: absolute;
@@ -88,10 +88,11 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, 50%);
+  pointer-events:none;
 }
 
-.clickMe:hover {
-  font-size: 1.2em;
+.day:hover .clickMe {
+  font-size: 1.1em;
 }
 
 
