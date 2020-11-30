@@ -95,7 +95,22 @@ function displayOverlay(entry)
 {
   //alert(entry.musicians[0].artist);
   var $overlay = $('<div id="overlay"> </div>');
-  $overlay.appendTo(document.body)
+  var $overlayBox = $('<div id="overlayBox"> </div>');
+  var $overlayContent = $('<div> </div>');
+
+  var $name = $('<h2 class="overlayTextTitle">'+entry.artist+'</h2>');
+  $name.appendTo($overlayContent);
+
+  for (var i=0; i<entry.bio.length; i++)
+  {
+    var $bio = $('<p class="overlayText">'+entry.bio[i]+'</p>');
+    $bio.appendTo($overlayContent);
+  }
+
+  $overlay.appendTo(document.body);
+  $overlayBox.appendTo($overlay);
+  $overlayContent.appendTo($overlayBox);
+
 }
 
 
@@ -114,19 +129,13 @@ $(document).ready(function () {
 //$(".day-title").click(function(){ //direct binding
 $(document).on("click", ".day-title", function(){ //delegated binding, using on
 
+  //Box already clicked and revealed
   if ($(this).hasClass('clicked'))
   {
     clickedDay = $(this)
+
     $.getJSON("jazzvent-database.json").done(function (data){
-    //alert(JSON.stringify(data));
-    // alert($(this).attr("id"));
-    // if ($(this).attr("id") == "overlay")
-    // {
-    //   $("#overlay").remove();
-    // } else {
-    //   displayOverlay(data);
-    // }
-    displayOverlay(data);
+      displayOverlay(data.musicians[clickedDay.attr("id")-1]);
     });
   }
   else //Box not clicked
@@ -143,12 +152,12 @@ $(document).on("click", ".day-title", function(){ //delegated binding, using on
   }
   //alert($(this).attr("class"));
 
-
-
   event.preventDefault(); //stop scroll to top of page
 });
 
-$(document).on("click", "#overlay", function() {
+
+$(document).on("click", "#overlay, #overlayBox", function() {
   $("#overlay").remove();
+  $("#overlayBox").remove();
   clickedDay.removeClass('clicked');
 })
