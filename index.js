@@ -35,15 +35,18 @@ function drawBoxes(json)
 
       try {
         var im = "./images/" + json.musicians[dateArray[i]-1].photo
-        var $img = $("<img />", {class: "day-image", src: im});
+        var $img = $("<img />", {class: "day-image", id: dateArray[i], src: im});
       } catch (e) {
-        var $img = $("<img />", {class: "day-image", src: "./images/" + json.musicians[0].photo});
+        var $img = $("<img />", {class: "day-image", id: dateArray[i], src: "./images/" + json.musicians[0].photo});
       }
+      var $clickMe = $("<div></div>", {class:'clickMe'}).text("Click me!");
+      $box.append($clickMe.clone());
 
       var R = (Math.random()+3)*40;
       var G = 0;
       var B = Math.random()*50;
       $content.css('background', 'rgb('+R+','+G+','+B+')')
+
       $box.append($content.clone());
       $box.append($img.clone());
       $("#wrapper").append($box.clone());
@@ -80,7 +83,6 @@ function displayOverlay(entry)
   $overlay.appendTo(document.body);
   $overlayBox.appendTo($overlay);
   $overlayContent.appendTo($overlayBox);
-  $("#overlay .faded").fadeIn();
 
 }
 
@@ -96,32 +98,35 @@ $(document).ready(function () {
 });
 
 
-
-//$(".day-title").click(function(){ //direct binding
+//Remove day title cards
 $(document).on("click", ".day-title", function(){ //delegated binding, using on
+  //clickedDay = $(this)
 
-  //Box already clicked and revealed
-  if ($(this).hasClass('clicked'))
+  var day = $(this).attr("id");
+  if (date.getDate()-20 >= day)
+  {
+    $(this).addClass('recessed');
+  }
+
+  event.preventDefault(); //stop scroll to top of page
+});
+
+//Logic on image and overlay clicking
+$(document).on("click", ".day-image", function(){ //delegated binding, using on
+  if (!$(this).hasClass('clicked'))
   {
     clickedDay = $(this)
-
     $.getJSON("jazzvent-database.json").done(function (data){
       displayOverlay(data.musicians[clickedDay.attr("id")-1]);
     });
+    $(this).addClass('clicked');
   }
-  else //Box not clicked
+  else //Overlay just removed
   {
-    var day = $(this).attr("id");
-    if (date.getDate()-10 >= day) //for testing
-    {
-      $(this).toggleClass('faded');
-      if ($(this).hasClass('faded'))
-      {
-        $(this).toggleClass('clicked');
-      }
-    }
+    $(this).removeClass('clicked');
+    var $id = $(this).attr("id");
+    $("#"+$id+" .day-title").removeClass('recessed');
   }
-  //alert($(this).attr("class"));
 
   event.preventDefault(); //stop scroll to top of page
 });
@@ -130,5 +135,5 @@ $(document).on("click", ".day-title", function(){ //delegated binding, using on
 $(document).on("click", "#overlay, #overlayBox", function() {
   $("#overlay").remove();
   //$("#overlayBox").remove();
-  clickedDay.removeClass('clicked');
+  //clickedDay.removeClass('clicked');
 })

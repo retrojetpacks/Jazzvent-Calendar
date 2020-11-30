@@ -29,6 +29,8 @@ img {
   height: auto;
 }
 
+
+
 .day {
   position: relative;
 }
@@ -71,8 +73,26 @@ img {
 .faded {
   opacity: 0;
 }
+.recessed {
+  z-index: -10;
+}
 
 .clicked {}
+
+
+.clickMe {
+  font-size: 1em;
+  color: white;
+  position: absolute;
+  bottom: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.clickMe:hover {
+  font-size: 1.2em;
+}
 
 
 /*======== Overlay ========*/
