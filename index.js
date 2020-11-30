@@ -1,36 +1,5 @@
-var scrs = ["https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/san-fransisco-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/london-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/new-york-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cape-town-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/san-fransisco-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/london-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/new-york-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cape-town-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/san-fransisco-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/london-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/new-york-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cape-town-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/san-fransisco-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/london-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/new-york-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cape-town-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cape-town-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/san-fransisco-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/london-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/new-york-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cape-town-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/san-fransisco-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/london-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/new-york-768x432.jpg",
-            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cape-town-768x432.jpg"]
-
-// //On click,
-//Find ID of clicked object
-//Add css to reveal the underneath.
-
-
 var date = new Date();
-var clickedDay;
+var clickedDay; //store jquery address
 
 function setup_dateArray()
 {
@@ -68,7 +37,7 @@ function drawBoxes(json)
         var im = "./images/" + json.musicians[dateArray[i]-1].photo
         var $img = $("<img />", {class: "day-image", src: im});
       } catch (e) {
-        var $img = $("<img />", {class: "day-image", src: scrs[dateArray[i]-1]});
+        var $img = $("<img />", {class: "day-image", src: "./images/" + json.musicians[0].photo});
       }
 
       var R = (Math.random()+3)*40;
@@ -94,6 +63,7 @@ function drawSnow()
 function displayOverlay(entry)
 {
   //alert(entry.musicians[0].artist);
+  //var $overlay = $('<div id="overlay" class="faded"> </div>');
   var $overlay = $('<div id="overlay"> </div>');
   var $overlayBox = $('<div id="overlayBox"> </div>');
   var $overlayContent = $('<div> </div>');
@@ -110,6 +80,7 @@ function displayOverlay(entry)
   $overlay.appendTo(document.body);
   $overlayBox.appendTo($overlay);
   $overlayContent.appendTo($overlayBox);
+  $("#overlay .faded").fadeIn();
 
 }
 
@@ -158,6 +129,6 @@ $(document).on("click", ".day-title", function(){ //delegated binding, using on
 
 $(document).on("click", "#overlay, #overlayBox", function() {
   $("#overlay").remove();
-  $("#overlayBox").remove();
+  //$("#overlayBox").remove();
   clickedDay.removeClass('clicked');
 })
