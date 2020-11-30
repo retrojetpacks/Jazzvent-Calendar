@@ -56,12 +56,35 @@ function drawBoxes(json)
 
 function drawSnow()
 {
-  var Nsnow = 25;
-  var $snow = $("<div></div>", {class: "snow"});
+  var Nsnow = 50;
+  var $BG = $(".backdrop")
+  var $W = $BG.width()*1.2;
+  var $sig = $W / 10;
+
   for (var i = 0; i < Nsnow; i++) {
-    $(".backdrop").append($snow.clone());
+    var $snow = $("<div></div>", {class: "snow", id: i});
+    $BG.append($snow);
+
+    var x = Math.random(i) * $W - $W/10;
+    var x2 = x + (Math.random(i)-0.5)*$sig
+    var t = 4 + Math.random(i) * 3;
+    var t2 = Math.random(i) * 5;
+
+    $.keyframe.define([{
+      name: 'fall'+i,
+      '0%': { 'transform': 'translate('+x+'px,0px)'},
+      '100%': { 'transform': 'translate('+x2+'px, 150vh)'}
+    }])
+    $('#'+i+'.snow').playKeyframe({
+      name: 'fall'+i,
+      duration: t+'s',
+      timingFunction: 'linear',
+      iterationCount: 'infinite',
+      delay: t2+'s'
+    })
   }
 }
+
 
 function displayOverlay(entry)
 {
@@ -88,13 +111,15 @@ function displayOverlay(entry)
 
 
 $(document).ready(function () {
+  //==== draw snow effects ==//
+  drawSnow();
+
   //==== Load JSON data ====//
   var obj = $.getJSON("jazzvent-database.json").done(function (data){
   drawBoxes(data);
   });
 
-  //==== draw snow effects ==//
-  drawSnow();
+
 });
 
 
