@@ -65,7 +65,7 @@ function drawBoxes(json)
       var $content = $("<a />", {class: 'day-title', id: dateArray[i], href: '#'}).text(dateArray[i]);
 
       try {
-        var im = "/images-pre/" + json.musicians[dateArray[i]-1].photo
+        var im = "./images-pre/" + json.musicians[dateArray[i]-1].photo
         var $img = $("<img />", {class: "day-image", src: im});
       } catch (e) {
         var $img = $("<img />", {class: "day-image", src: scrs[dateArray[i]-1]});
