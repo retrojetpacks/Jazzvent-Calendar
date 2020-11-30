@@ -54,6 +54,8 @@ function drawBoxes(json)
 }
 
 
+
+
 function drawSnow()
 {
   var Nsnow = 50;
@@ -86,6 +88,7 @@ function drawSnow()
 }
 
 
+
 function displayOverlay(entry)
 {
   //alert(entry.musicians[0].artist);
@@ -96,6 +99,13 @@ function displayOverlay(entry)
 
   var $name = $('<h2 class="overlayTextTitle">'+entry.artist+'</h2>');
   $name.appendTo($overlayContent);
+
+  var url = "https://www.youtube.com/embed/" + entry.songLink;
+  var $YouTube = $('<iframe id="myIframe" class="videoWrapper" src="'+url+'"autoplay=1></iframe>');
+
+  //<iframe width="1280" height="720" src="https://www.youtube.com/embed/gR-RYOnNwPQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+  $YouTube.appendTo($overlayContent);
 
   for (var i=0; i<entry.bio.length; i++)
   {
