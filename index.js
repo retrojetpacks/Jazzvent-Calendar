@@ -1,4 +1,4 @@
-var date = new Date();
+var date = new Date().getDate();
 var clickedDay; //store jquery address
 
 function setup_dateArray()
@@ -42,12 +42,16 @@ function drawBoxes(json)
       var $clickMe = $("<div></div>", {class:'clickMe'}).text("Click me!");
       $box.append($clickMe.clone());
 
-      var R = (Math.random()+3)*40;
-      var G = 0;
-      var B = Math.random()*50;
-      $content.css('background', 'rgb('+R+','+G+','+B+')')
+      //Draw if date has passed
+      if (date-1 < dateArray[i]) //Not sure why the -1..?
+      {
+        var R = (Math.random()+3)*40;
+        var G = 0;
+        var B = Math.random()*50;
+        $content.css('background', 'rgb('+R+','+G+','+B+')')
+        $box.append($content.clone());
+      }
 
-      $box.append($content.clone());
       $box.append($img.clone());
       $("#wrapper").append($box.clone());
     }
@@ -58,24 +62,29 @@ function drawBoxes(json)
 
 function drawSnow()
 {
-  var Nsnow = 50;
+  var dateChaos = date;
+  var Nsnow = 50 + 2 * dateChaos;
   var $BG = $(".backdrop")
   var $W = $BG.width()*1.2;
   var $sig = $W / 10;
+  //var pageHeight = document.documentElement.scrollHeight;
 
   for (var i = 0; i < Nsnow; i++) {
     var $snow = $("<div></div>", {class: "snow", id: i});
+    $snow.css("width",10+dateChaos/2);
+    $snow.css("height",10+dateChaos/2);
     $BG.append($snow);
 
-    var x = Math.random(i) * $W - $W/10;
-    var x2 = x + (Math.random(i)-0.5)*$sig
-    var t = 10 + Math.random(i) * 5;
-    var t2 = Math.random(i) * 10;
+    var t_offset = 10 - dateChaos/3;
+    var x = Math.random(i) * ($W+30*dateChaos) - $W/10 - dateChaos*30;
+    var x2 = x + (Math.random(i)-0.5)*$sig + dateChaos*100;
+    var t = t_offset + Math.random(i) * 5;
+    var t2 = Math.random(i) * t_offset;
 
     $.keyframe.define([{
       name: 'fall'+i,
       '0%': { 'transform': 'translate('+x+'px,0px)'},
-      '100%': { 'transform': 'translate('+x2+'px, 150vh)'}
+      '100%': { 'transform': 'translate('+x2+'px, 180vh)'}
     }])
     $('#'+i+'.snow').playKeyframe({
       name: 'fall'+i,
@@ -87,6 +96,10 @@ function drawSnow()
   }
 }
 
+function drawGround(){
+  var snowHeight = 90 - date;
+  $(".snow-floor").css("transform","translateY("+snowHeight+"%)");
+}
 
 
 function displayOverlay(entry)
@@ -102,9 +115,6 @@ function displayOverlay(entry)
 
   var url = "https://www.youtube.com/embed/" + entry.songLink;
   var $YouTube = $('<iframe id="myIframe" class="videoWrapper" src="'+url+'"autoplay=1></iframe>');
-
-  //<iframe width="1280" height="720" src="https://www.youtube.com/embed/gR-RYOnNwPQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
   $YouTube.appendTo($overlayContent);
 
   for (var i=0; i<entry.bio.length; i++)
@@ -113,11 +123,17 @@ function displayOverlay(entry)
     $bio.appendTo($overlayContent);
   }
 
+  var $contributor = $('<p class="overlayText">'+entry.contributor+'</p>');
+  $contributor.appendTo($overlayContent);
+
   $overlay.appendTo(document.body);
   $overlayBox.appendTo($overlay);
   $overlayContent.appendTo($overlayBox);
 
 }
+
+
+
 
 
 $(document).ready(function () {
@@ -129,7 +145,7 @@ $(document).ready(function () {
   drawBoxes(data);
   });
 
-
+  drawGround();
 });
 
 
@@ -138,7 +154,7 @@ $(document).on("click", ".day-title", function(){ //delegated binding, using on
   //clickedDay = $(this)
 
   var day = $(this).attr("id");
-  if (date.getDate() >= day)
+  if (date >= day)
   {
     $(this).addClass('recessed');
   }
@@ -154,7 +170,10 @@ $(document).on("click", ".day-image", function(){ //delegated binding, using on
     $.getJSON("jazzvent-database.json").done(function (data){
       displayOverlay(data.musicians[clickedDay.attr("id")-1]);
     });
-    $(this).addClass('clicked');
+    if (date> day)
+    {
+      $(this).addClass('clicked');
+    }
   }
   else //Overlay just removed
   {
