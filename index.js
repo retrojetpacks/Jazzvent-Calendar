@@ -69,8 +69,8 @@ function drawSnow()
 
     var x = Math.random(i) * $W - $W/10;
     var x2 = x + (Math.random(i)-0.5)*$sig
-    var t = 4 + Math.random(i) * 3;
-    var t2 = Math.random(i) * 5;
+    var t = 10 + Math.random(i) * 5;
+    var t2 = Math.random(i) * 10;
 
     $.keyframe.define([{
       name: 'fall'+i,
@@ -138,7 +138,7 @@ $(document).on("click", ".day-title", function(){ //delegated binding, using on
   //clickedDay = $(this)
 
   var day = $(this).attr("id");
-  if (date.getDate()-20 >= day)
+  if (date.getDate() >= day)
   {
     $(this).addClass('recessed');
   }
