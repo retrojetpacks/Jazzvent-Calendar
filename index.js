@@ -84,7 +84,7 @@ function drawSnow()
     $.keyframe.define([{
       name: 'fall'+i,
       '0%': { 'transform': 'translate('+x+'px,0px)'},
-      '100%': { 'transform': 'translate('+x2+'px, 180vh)'}
+      '100%': { 'transform': 'translate('+x2+'px, 250vh)'}
     }])
     $('#'+i+'.snow').playKeyframe({
       name: 'fall'+i,
