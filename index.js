@@ -98,11 +98,11 @@ function drawSnow()
 
 function drawGround(){
   var snowHeight = 90 - date;
-  $(".snow-floor").css("-ms-transform","translateY("+snowHeight+"%)");
-  $(".snow-floor").css("-webkit-transform","translateY("+snowHeight+"%)");
-  $(".snow-floor").css("-moz-transform","translateY("+snowHeight+"%)");
-  $(".snow-floor").css("-o-transform","translateY("+snowHeight+"%)");
-  $(".snow-floor").css("transform","translateY("+snowHeight+"%)");
+  // $(".snow-floor").css("-ms-transform","translateY("+snowHeight+"%)");
+  // $(".snow-floor").css("-webkit-transform","translateY("+snowHeight+"%)");
+  // $(".snow-floor").css("-moz-transform","translateY("+snowHeight+"%)");
+  // $(".snow-floor").css("-o-transform","translateY("+snowHeight+"%)");
+  // $(".snow-floor").css("transform","translateY("+snowHeight+"%)");
 }
 
 
