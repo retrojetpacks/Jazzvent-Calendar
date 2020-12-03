@@ -98,11 +98,18 @@ function drawSnow()
 
 function drawGround(){
   var snowHeight = 90 - date;
-  // $(".snow-floor").css("-ms-transform","translateY("+snowHeight+"%)");
-  // $(".snow-floor").css("-webkit-transform","translateY("+snowHeight+"%)");
-  // $(".snow-floor").css("-moz-transform","translateY("+snowHeight+"%)");
-  // $(".snow-floor").css("-o-transform","translateY("+snowHeight+"%)");
-  // $(".snow-floor").css("transform","translateY("+snowHeight+"%)");
+  $(".snow-floor").css("-ms-transform","translateY("+snowHeight+"%)");
+  $(".snow-floor").css("-webkit-transform","translateY("+snowHeight+"%)");
+  $(".snow-floor").css("-moz-transform","translateY("+snowHeight+"%)");
+  $(".snow-floor").css("-o-transform","translateY("+snowHeight+"%)");
+  $(".snow-floor").css("transform","translateY("+snowHeight+"%)");
+
+  if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1)
+  {
+    alert('Its Safari');
+    $(".snow-floor").css("opacity","0");
+  }
+
 }
 
 
