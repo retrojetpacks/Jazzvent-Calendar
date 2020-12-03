@@ -99,6 +99,7 @@ function drawSnow()
 function drawGround(){
   var snowHeight = 90 - date;
   $(".snow-floor").css("transform","translateY("+snowHeight+"%)");
+  $(".snow-floor").css("-webkit-transform","translateY("+snowHeight+"%)");
 }
 
 
