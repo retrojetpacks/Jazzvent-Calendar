@@ -39,7 +39,8 @@ function drawBoxes(json)
       } catch (e) {
         var $img = $("<img />", {class: "day-image", id: dateArray[i], src: "./images/" + json.musicians[0].photo});
       }
-      var $clickMe = $("<div></div>", {class:'clickMe'}).text("Click me!");
+      //var $clickMe = $("<div></div>", {class:'clickMe'}).text("Click me!");
+      var $clickMe = $("<div></div>", {class:'clickMe'}).text(dateArray[i]);
       $box.append($clickMe.clone());
 
       //Draw if date has passed
