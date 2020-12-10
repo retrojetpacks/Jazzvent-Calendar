@@ -129,7 +129,20 @@
       ],
       "contributor":"Sophie"
     },
-
+    {
+      "artist": "Ray Nance",
+      "songName": "Take the A Train",
+      "songLink": "YKDSfx5d2pc",
+      "photo": "ray.png",
+      "bio": [
+        "In the words of Duke Ellington, 'Ray Nance never played a bad note in his life'. Nance (1913-1976) was a multi-talented trumpet, cornet, violin and piano player, as well as a singer and dancer. He led his own band in Chicago from the age of 19 to 24, before spending a few years playing with Earl Hines and Horace Henderson, and even managing his own solo show.",
+        "He moved to New York where he joined Duke Ellington's band in 1940 as a late arrival, the band had been touring for nine years by that point. Nance replaced his idol, the bombastic Cootie Williams on plunger trumpet (a staple of the Ellington sound first introduced by Bubber Miley). Ten years after teaching Cootie, the trombonist 'Tricky' Sam Nanton helped Nance to develop his own distinctive plunger mute style.",
+        "Nance's most famous contribution to jazz may be his muted trumpet solo on the earliest recording of today's featured song, 'Take the A Train' (starting at 0:51). This Billy Strayhorn composition became the new theme of the Ellington orchestra, replacing 'Sepia Panorama'. The A in A Train refers to the newly opened New York A subway that runs from Brooklyn to Harlem.",
+        "Notably, Nance is the only violin soloist featured in Ellington's orchestra, and is responsible for the famous violin solos in 'CJam blues' and 'Mr Gentle and Mr Cool' that some of you may recognise. You may have also heard his 'highly animated vocals' from later recordings of A Train.",
+        "Cootie returned to Ellington's band in 1962 and Ray switched to cornet to make way for him. Things came to a head a year later in the 1963 Middle East tour when the two had a confrontation, leading Cootie to slap Nance. In part due to this mistreatment from his old idol, Nance requested to leave the tour early, afterwards only ever making guest appearances with the Duke. Cootie would continue to play Nance's 'A' Train solo 'note for note' after his departure."
+    ],
+      "contributor":"Jack"
+    },
     {
       "artist": "Ella Fitzgerald",
       "songName": "Flying Home",
