@@ -138,6 +138,12 @@ function displayOverlay(entry)
   var $contributor = $('<p class="overlayText">'+entry.contributor+'</p>');
   $contributor.appendTo($overlayContent);
 
+  if (entry.ps)
+  {
+    var $ps = $('<p class="overlayText">'+entry.ps+'</p>');
+    $ps.appendTo($overlayContent);
+  }
+
   $overlay.appendTo(document.body);
   $overlayBox.appendTo($overlay);
   $overlayContent.appendTo($overlayBox);
