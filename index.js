@@ -1,4 +1,4 @@
-var date = 17;//new Date().getDate();
+var date = new Date().getDate();
 var clickedDay; //store jquery address
 
 function setup_dateArray()
