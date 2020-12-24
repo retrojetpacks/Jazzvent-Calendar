@@ -128,9 +128,11 @@ function displayOverlay(entry)
 
   if (entry.artist == "Ella Fitzgerald") {
       console.log("Ella!");
-      var url25 = "https://youtu.be/94Hhu56EnAQ?list=PLhXMMSio319XXCPZJslETAaI-bj_HMgIF";
-      var $YouTube = $('<iframe id="myIframe" class="videoWrapper" src="' + url25 + '"autoplay=1></iframe>');
+      //var url25 = "https://youtu.be/94Hhu56EnAQ?list=PLhXMMSio319XXCPZJslETAaI-bj_HMgIF";
+      //var $YouTube = $('<iframe id="myIframe" class="videoWrapper" src="' + url25 + '"autoplay=1></iframe>');
+      var $YouTube = $('<iframe id="myIframe" class="videoWrapper" src="https://www.youtube.com/embed/94Hhu56EnAQ?list=PLhXMMSio319XXCPZJslETAaI-bj_HMgIF" autoplay=1></iframe>'); 
       $YouTube.appendTo($overlayContent);
+      //<iframe width="1280" height="720" src="https://www.youtube.com/embed/94Hhu56EnAQ?list=PLhXMMSio319XXCPZJslETAaI-bj_HMgIF" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   }
   else
   {
@@ -196,7 +198,8 @@ $(document).on("click", ".day-image", function(){ //delegated binding, using on
   if (!$(this).hasClass('clicked'))
   {
     clickedDay = $(this)
-    $.getJSON("jazzvent-database.json").done(function (data){
+      $.getJSON("jazzvent-database.json").done(function (data) {
+      console.log(data.musicians[clickedDay.attr("id") - 1]); //JH
       displayOverlay(data.musicians[clickedDay.attr("id")-1]);
     });
     if (date> day)
