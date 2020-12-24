@@ -1,4 +1,4 @@
-var date = new Date().getDate();
+var date = 25;//new Date().getDate();
 var clickedDay; //store jquery address
 
 function setup_dateArray()
@@ -125,9 +125,18 @@ function displayOverlay(entry)
   var $name = $('<h2 class="overlayTextTitle">'+entry.artist+'</h2>');
   $name.appendTo($overlayContent);
 
-  var url = "https://www.youtube.com/embed/" + entry.songLink;
-  var $YouTube = $('<iframe id="myIframe" class="videoWrapper" src="'+url+'"autoplay=1></iframe>');
-  $YouTube.appendTo($overlayContent);
+    if (entry.artist == "Ella Fitzgerald") {
+        var url25 = "https://www.youtube.com/embed/94Hhu56EnAQ?list=PLhXMMSio319XXCPZJslETAaI-bj_HMgIF";
+        var $YouTube = $('<iframe id="myIframe" class="videoWrapper" src="' + url25 + '"autoplay=1></iframe>');
+        $YouTube.appendTo($overlayContent);
+    }
+    else
+    {
+        var url = "https://www.youtube.com/embed/" + entry.songLink;
+        var $YouTube = $('<iframe id="myIframe" class="videoWrapper" src="' + url + '"autoplay=1></iframe>');
+        $YouTube.appendTo($overlayContent);
+    }
+    
 
   for (var i=0; i<entry.bio.length; i++)
   {
