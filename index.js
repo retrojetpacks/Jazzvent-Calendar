@@ -126,7 +126,9 @@ function displayOverlay(entry)
   $name.appendTo($overlayContent);
 
     if (entry.artist == "Ella Fitzgerald") {
-        var url25 = "https://www.youtube.com/embed/94Hhu56EnAQ?list=PLhXMMSio319XXCPZJslETAaI-bj_HMgIF";
+        console.log("Ella!");
+        console.log();
+        var url25 = "https://youtu.be/94Hhu56EnAQ?list=PLhXMMSio319XXCPZJslETAaI-bj_HMgIF";
         var $YouTube = $('<iframe id="myIframe" class="videoWrapper" src="' + url25 + '"autoplay=1></iframe>');
         $YouTube.appendTo($overlayContent);
     }
